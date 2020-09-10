@@ -6,7 +6,9 @@ pipeline {
         timestamps()  // Timestamper Plugin
         disableConcurrentBuilds()
     }
-
+    triggers {
+        pollSCM('H/5 * * * *')
+    }
     stages {
         stage('Greeting') {
             steps {
