@@ -12,12 +12,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'mvn -B -V -U -e clean verify -Dsurefire.useFile=false -DargLine="-Djdk.net.URLClassPath.disableClassPathURLCheck=true"'
 
-                sh 'java -version'
+                archiveArtifacts 'target/*.?ar'
 
-                sh 'javac -version'
-
-                sh 'mvn --version'
+                junit 'target/**/*.xml'  // Requires JUnit plugin
             }
         }
     }
