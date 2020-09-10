@@ -1,3 +1,5 @@
+@Library('jenkins-techlab-libraries') _
+
 pipeline {
     agent any // with hosted env use agent { label env.JOB_NAME.split('/')[0] }
     options {
@@ -23,14 +25,8 @@ pipeline {
         }
     }
     post {
-        success {
-            rocketSend avatar: 'https://chat.puzzle.ch/emoji-custom/success.png',  message: "Build success - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
-        }
-        unstable {
-            rocketSend avatar: 'https://chat.puzzle.ch/emoji-custom/unstable.png',  message: "Build unstable - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
-        }
-        failure {
-            rocketSend avatar: 'https://chat.puzzle.ch/emoji-custom/failure.png',  message: "Build failure - ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)", rawMessage: true
+        always {
+            notifyPuzzleChat('jenkins-techlab')
         }
     }
 }
