@@ -29,7 +29,7 @@ public class HelloTest {
         Hello hi = new Hello();
         hi.sayHello(stream);
 
-        assertThat(os.toString(), is(equalTo(String.format("%s%s Whoops", Hello.HELLO, System.lineSeparator()))));
+        assertThat(os.toString(), is(equalTo(String.format("%s%s", Hello.HELLO, System.lineSeparator()))));
     }
 
     @Test
