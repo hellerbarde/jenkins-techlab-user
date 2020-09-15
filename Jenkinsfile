@@ -7,13 +7,13 @@ pipeline {
         timeout(time: 10, unit: 'MINUTES')
         timestamps()  // Timestamper Plugin
     }
-    environment{
+//    environment{
 //        M2_SETTINGS = credentials('m2_settings')
 //        KNOWN_HOSTS = credentials('known_hosts')
 //        ARTIFACTORY = credentials('jenkins-artifactory')
 //        ARTIFACT = "${env.JOB_NAME.split('/')[0]}-hello"
 //        REPO_URL = 'https://artifactory.puzzle.ch/artifactory/ext-release-local'
-    }
+//    }
     tools {
         jdk 'jdk11'
         maven 'maven35'
@@ -44,6 +44,7 @@ pipeline {
             steps {
                 input "Deploy?"
                 milestone(30)  // Abort all older builds that didn't get here
+                sh 'echo Call me maybe?'
                 //sh "mvn -s '${M2_SETTINGS}' -B deploy:deploy-file -DrepositoryId='puzzle-releases' -Durl='${REPO_URL}' -DgroupId='com.puzzleitc.jenkins-techlab' -DartifactId='${ARTIFACT}' -Dversion='1.0' -Dpackaging='jar' -Dfile=`echo target/*.jar`"
 
                 //sshagent(['testserver']) {
